@@ -23,7 +23,9 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
     # TODO: Implement for Task 1.1.
-    raise NotImplementedError('Need to implement for Task 1.1')
+    new_vals = list(vals)
+    new_vals[arg] += epsilon
+    return (f(*new_vals) - f(*vals)) / epsilon
 
 
 variable_count = 1
@@ -62,8 +64,18 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
         Non-constant Variables in topological order starting from the right.
     """
     # TODO: Implement for Task 1.4.
-    raise NotImplementedError('Need to implement for Task 1.4')
-
+    visited = set()
+    ans = []
+    def dfs(variable: Variable):
+        if variable.unique_id in visited or variable.is_constant():
+            return
+        visited.add(variable.unique_id)
+        for parent in variable.parents:
+            dfs(parent)
+        ans.append(variable)
+    dfs(variable)
+    ans.reverse()
+    return ans
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
     """
@@ -77,7 +89,18 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
     # TODO: Implement for Task 1.4.
-    raise NotImplementedError('Need to implement for Task 1.4')
+    graph = topological_sort(variable)
+    derivatives = {}
+    for var in graph:
+        derivatives[var.unique_id] = 0.0
+    derivatives[variable.unique_id] = deriv
+    for var in graph:
+        if var.is_leaf():
+            var.accumulate_derivative(derivatives[var.unique_id])
+            continue
+        d_output = var.chain_rule(derivatives[var.unique_id])
+        for parent, d_parent in d_output:
+            derivatives[parent.unique_id] += d_parent
 
 
 @dataclass
@@ -90,7 +113,9 @@ class Context:
     saved_values: Tuple[Any, ...] = ()
 
     def save_for_backward(self, *values: Any) -> None:
-        "Store the given `values` if they need to be used during backpropagation."
+        """
+        Store the given `values` if they need to be used during backpropagation.
+        """
         if self.no_grad:
             return
         self.saved_values = values
