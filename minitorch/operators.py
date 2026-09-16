@@ -100,7 +100,6 @@ def log_back(x: float, d: float) -> float:
     r"If $f = log$ as above, compute $d \times f'(x)$"
     # TODO: Implement for Task 0.1.
     return d * (1 / (x + EPS))
-    
 
 
 def inv(x: float) -> float:
@@ -173,6 +172,7 @@ def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
     "Add the elements of `ls1` and `ls2` using `zipWith` and `add`"
     # TODO: Implement for Task 0.3.
     return zipWith(add)(ls1, ls2)
+
 
 def reduce(
     fn: Callable[[float, float], float], start: float

@@ -151,7 +151,7 @@ def test_distribute(z: float, x: float, y: float) -> None:
 def test_other(x: float) -> None:
     """
     Write a test that ensures some other property holds for your functions.
-    Test neg and add: x + (-x) = 0 
+    Test neg and add: x + (-x) = 0
     """
     # TODO: Implement for Task 0.2.
     assert_close(add(x, neg(x)), 0)
