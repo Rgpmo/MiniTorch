@@ -21,6 +21,7 @@ class Graph:
 
 
 def simple(N: int) -> Graph:
+    """Generate N unit-square points, labeled 1 if x_1 < 0.5, else 0."""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -30,6 +31,7 @@ def simple(N: int) -> Graph:
 
 
 def diag(N: int) -> Graph:
+    """Generate N unit-square points, labeled 1 if x_1 + x_2 < 0.5, else 0."""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -39,6 +41,7 @@ def diag(N: int) -> Graph:
 
 
 def split(N: int) -> Graph:
+    """Generate N unit-square points, labeled 1 if x_1 < 0.2 or x_1 > 0.8, else 0."""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -48,6 +51,7 @@ def split(N: int) -> Graph:
 
 
 def xor(N: int) -> Graph:
+    """Generate N unit-square points, labeled 1 in the upper-left and lower-right quadrants."""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -57,6 +61,7 @@ def xor(N: int) -> Graph:
 
 
 def circle(N: int) -> Graph:
+    """Generate N unit-square points, labeled 1 outside radius sqrt(0.1) about (0.5, 0.5)."""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -67,6 +72,7 @@ def circle(N: int) -> Graph:
 
 
 def spiral(N: int) -> Graph:
+    """Generate two interleaved spirals labeled 0 and 1, with N // 2 points each."""
     def x(t: float) -> float:
         return t * math.cos(t) / 20.0
 

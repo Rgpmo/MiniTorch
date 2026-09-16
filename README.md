@@ -10,3 +10,14 @@ To access the autograder:
 * Module 3: https://classroom.github.com/a/U5CMJec1
 * Module 4: https://classroom.github.com/a/04QA6HZK
 * Quizzes: https://classroom.github.com/a/bGcGc12k
+
+
+## Task 0.5
+
+### Simple
+
+![Simple](images/simple.png)
+
+- weight_0_0 = -1
+- weight_1_0 = 0
+- bias_0 = 0.5
