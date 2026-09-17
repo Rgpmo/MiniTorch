@@ -100,6 +100,8 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
             continue
         d_output = var.chain_rule(derivatives[var.unique_id])
         for parent, d_parent in d_output:
+            if parent.is_constant():
+                continue
             derivatives[parent.unique_id] += d_parent
 
 
